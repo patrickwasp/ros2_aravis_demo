@@ -1,0 +1,23 @@
+version: '2.4'
+
+services:
+
+  ros-foxglove:
+    image: ros2-demo-foxglove:v1
+    build:
+      context: .
+      dockerfile: ./docker/foxglove.dockerfile
+    environment:
+      - ROS_DOMAIN_ID=7
+    privileged: true
+    network_mode: host
+
+  ros-aravis:
+    image: ros2-demo-aravis:v1
+    build:
+      context: .
+      dockerfile: ./docker/aravis.dockerfile
+    environment:
+      - ROS_DOMAIN_ID=7
+    privileged: true
+    command: ros2 run aravis_camera aravis_camera_node
